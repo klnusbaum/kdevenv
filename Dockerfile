@@ -32,6 +32,7 @@ RUN <<EOT
     rm "$NVIM_DEB"
 EOT
 
+ARG USER
 RUN <<EOT
     export LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/download/3.6.4/lua-language-server-3.6.4-linux-x64.tar.gz" 
     export LUA_LSP_TAR="/tmp/lua-lsp.tar.gz"
@@ -44,7 +45,7 @@ RUN <<EOT
     rm "$LUA_LSP_TAR"
     cat /tmp/helpers/lua-language-server.template | envsubst > "$LUA_LSP_BIN"
     chmod 755 "$LUA_LSP_BIN"
-    chown -R kurtis:kurtis "$LUA_LSP_DIR"
+    chown -R "${USER}:${USER}" "$LUA_LSP_DIR"
 EOT
 
 RUN rm -r /tmp/helpers
