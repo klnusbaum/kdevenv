@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly URL="$1"
+readonly OUTPUT="$2"
+readonly WANT_CHECKSUM="$3"
+
+curl -fsLS "$URL" -o "$OUTPUT"
+readonly HASH="$(sha256sum "${OUTPUT}")" || return 1
+readonly GOT_CHECKSUM=$(printf '%s' "${HASH}" | cut -d ' ' -f 1)
+
+if [ "${WANT_CHECKSUM}" != "$GOT_CHECKSUM" ]; then
+    echo "for ${URL} wanted checksum ${WANT_CHECKSUM}, got ${GOT_CHECKSUM}"
+    exit 1
+fi

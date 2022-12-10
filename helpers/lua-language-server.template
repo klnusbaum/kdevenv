@@ -1,0 +1,2 @@
+#!/bin/bash
+exec "$LUA_LSP_DIR/bin/lua-language-server" "$@"

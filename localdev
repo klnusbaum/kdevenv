@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+docker run -it --rm \
+    -h kdevenv \
+    --name liveenv \
+    --volume "$HOME:$HOME" \
+    --workdir "$HOME" \
+    --user "$UID:$(id -g)" \
+    kdevenv:1.0 \
+    /bin/zsh
