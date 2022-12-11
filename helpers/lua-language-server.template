@@ -1,2 +1,8 @@
-#!/bin/bash
-exec "$LUA_LSP_DIR/bin/lua-language-server" "$@"
+#!/usr/bin/env sh
+TMPPATH=$(mktemp -d "/tmp/lua-language-server.XXXX")
+DEFAULT_LOGPATH="$TMPPATH/log"
+DEFAULT_METAPATH="$TMPPATH/meta"
+
+exec $LUA_LSP_DIR/bin/lua-language-server \
+  --logpath="$DEFAULT_LOGPATH" --metapath="$DEFAULT_METAPATH" \
+  "$@"

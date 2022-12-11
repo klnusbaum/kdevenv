@@ -30,7 +30,6 @@ RUN NVIM_URL="https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-lin
     rm "$NVIM_DEB";
 
 # Install lua-language-server
-ARG USER
 RUN LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/download/3.6.4/lua-language-server-3.6.4-linux-x64.tar.gz" ; \
     LUA_LSP_TAR="/tmp/lua-lsp.tar.gz"; \
     LUA_LSP_CHECKSUM="4ba34404a20d75a867c1aef19f0f98696e138aebcadbd104bba7619107f140ab"; \
@@ -41,8 +40,7 @@ RUN LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/downloa
     tar xvf "$LUA_LSP_TAR" -C "$LUA_LSP_DIR"; \
     rm "$LUA_LSP_TAR"; \
     LUA_LSP_DIR="$LUA_LSP_DIR" envsubst '$LUA_LSP_DIR' < /tmp/helpers/lua-language-server.template > "$LUA_LSP_BIN"; \
-    chmod 755 "$LUA_LSP_BIN"; \
-    chown -R "${USER}:${USER}" "$LUA_LSP_DIR";
+    chmod 755 "$LUA_LSP_BIN";
 
 # Cleanup helpers
 RUN rm -r /tmp/helpers
