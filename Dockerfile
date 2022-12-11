@@ -9,9 +9,9 @@ COPY ./helpers /tmp/helpers
 ARG USER
 ARG UID
 ARG GID
-ENV SHELL="/bin/zsh"
+ARG CONTAINER_SHELL
 RUN groupadd --gid "$GID" "$USER"; \
-    useradd --no-create-home --shell "$SHELL" --uid "$UID" --gid "$GID" "$USER"; \
+    useradd --no-create-home --shell "$CONTAINER_SHELL" --uid "$UID" --gid "$GID" "$USER"; \
     usermod -aG sudo "$USER";
 
 # Install Chezmoi
@@ -29,6 +29,7 @@ RUN NVIM_URL="https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-lin
     dpkg -i "$NVIM_DEB" ; \
     rm "$NVIM_DEB";
 
+# Install lua-language-server
 ARG USER
 RUN LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/download/3.6.4/lua-language-server-3.6.4-linux-x64.tar.gz" ; \
     LUA_LSP_TAR="/tmp/lua-lsp.tar.gz"; \
@@ -43,4 +44,5 @@ RUN LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/downloa
     chmod 755 "$LUA_LSP_BIN"; \
     chown -R "${USER}:${USER}" "$LUA_LSP_DIR";
 
+# Cleanup helpers
 RUN rm -r /tmp/helpers
