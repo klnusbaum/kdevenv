@@ -7,3 +7,8 @@
 4. Create an empty directory in your `$HOME` called `devhome` (this will be bind-mounted as the home directory for the container user).
 5. Run the `./localdev` script to launch the container.
 
+# Why?
+
+I'm tired of setting my development environment everytime I get a new laptop.
+This, combined with [chezmoi for managing my dotfiles](https://github.com/klnusbaum/dotfiles), should allow me to get up and running with minimal bootstrapping.
+I basically just need a terminal emulator, nerd fonts, and docker installed on the host machine.
