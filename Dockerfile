@@ -42,5 +42,20 @@ RUN LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/downloa
     LUA_LSP_DIR="$LUA_LSP_DIR" envsubst '$LUA_LSP_DIR' < /tmp/helpers/lua-language-server.template > "$LUA_LSP_BIN"; \
     chmod 755 "$LUA_LSP_BIN";
 
+# Install Rust
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH \
+    RUST_VERSION=1.65.0
+RUN RUST_ARCH="x86_64-unknown-linux-gnu"; \
+    RUST_INIT_URL="https://static.rust-lang.org/rustup/archive/1.25.1/$RUST_ARCH/rustup-init"; \
+    RUST_INIT_CHECKSUM="5cc9ffd1026e82e7fb2eec2121ad71f4b0f044e88bca39207b3f6b769aaa799c"; \
+    RUST_INIT_BIN="/tmp/rustup-init"; \
+    /tmp/helpers/bin_getter "$RUST_INIT_URL" "$RUST_INIT_BIN" "$RUST_INIT_CHECKSUM"; \
+    chmod +x $RUST_INIT_BIN; \
+    "$RUST_INIT_BIN" -y --no-modify-path --profile minimal --default-toolchain $RUST_VERSION --default-host $RUST_ARCH; \
+    rm "$RUST_INIT_BIN";
+
+
 # Cleanup helpers
 RUN rm -r /tmp/helpers
