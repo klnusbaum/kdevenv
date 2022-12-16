@@ -54,7 +54,7 @@ RUN RUST_ARCH="x86_64-unknown-linux-gnu"; \
     RUST_INIT_URL="https://static.rust-lang.org/rustup/archive/1.25.1/$RUST_ARCH/rustup-init"; \
     RUST_INIT_CHECKSUM="5cc9ffd1026e82e7fb2eec2121ad71f4b0f044e88bca39207b3f6b769aaa799c"; \
     RUST_INIT_BIN="/tmp/rustup-init"; \
-    RUST_VERSION=1.65.0; \
+    RUST_VERSION=1.66.0; \
     /tmp/helpers/bin_getter "$RUST_INIT_URL" "$RUST_INIT_BIN" "$RUST_INIT_CHECKSUM"; \
     chmod +x $RUST_INIT_BIN; \
     CARGO_HOME="/usr/local/cargo" "$RUST_INIT_BIN" \
