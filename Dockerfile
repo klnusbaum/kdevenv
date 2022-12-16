@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM debian:bullseye
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
-    sudo git curl tree gettext \
-    procps jq zsh man direnv
+    sudo git curl tree gettext build-essential \
+    procps jq zsh man direnv 
 COPY ./helpers /tmp/helpers
 
 # Setup user account to mirror host user
@@ -43,19 +43,27 @@ RUN LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/downloa
     chmod 755 "$LUA_LSP_BIN";
 
 # Install Rust
-ENV RUSTUP_HOME=/usr/local/rustup \
-    CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:$PATH \
-    RUST_VERSION=1.65.0
+#
+# N.B.
+# Note we don't set $CARGO_HOME globally, but rather just for installation.
+# This allows the Cargo binaries to be installed as part of the root file system.
+# But then the user can set $CARGO_HOME to something appropriate during runtime.
+# This allows the Cargo cache to be downloaded/stored elsewhere (e.g. $HOME/.cache/cargo)
+ENV RUSTUP_HOME="/usr/local/rustup" 
 RUN RUST_ARCH="x86_64-unknown-linux-gnu"; \
     RUST_INIT_URL="https://static.rust-lang.org/rustup/archive/1.25.1/$RUST_ARCH/rustup-init"; \
     RUST_INIT_CHECKSUM="5cc9ffd1026e82e7fb2eec2121ad71f4b0f044e88bca39207b3f6b769aaa799c"; \
     RUST_INIT_BIN="/tmp/rustup-init"; \
+    RUST_VERSION=1.65.0; \
     /tmp/helpers/bin_getter "$RUST_INIT_URL" "$RUST_INIT_BIN" "$RUST_INIT_CHECKSUM"; \
     chmod +x $RUST_INIT_BIN; \
-    "$RUST_INIT_BIN" -y --no-modify-path --profile minimal --default-toolchain $RUST_VERSION --default-host $RUST_ARCH; \
+    CARGO_HOME="/usr/local/cargo" "$RUST_INIT_BIN" \
+        -y \
+        --no-modify-path \
+        --profile default \
+        --default-toolchain $RUST_VERSION \
+        --default-host $RUST_ARCH; \
     rm "$RUST_INIT_BIN";
-
 
 # Cleanup helpers
 RUN rm -r /tmp/helpers
