@@ -50,7 +50,6 @@ RUN LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/downloa
 # This allows the Cargo binaries to be installed as part of the root file system.
 # But then the user can set $CARGO_HOME to something appropriate during runtime.
 # This allows the Cargo cache to be downloaded/stored elsewhere (e.g. $HOME/.cache/cargo)
-ENV RUSTUP_HOME="/usr/local/rustup" 
 RUN RUST_ARCH="x86_64-unknown-linux-gnu"; \
     RUST_INIT_URL="https://static.rust-lang.org/rustup/archive/1.25.1/$RUST_ARCH/rustup-init"; \
     RUST_INIT_CHECKSUM="5cc9ffd1026e82e7fb2eec2121ad71f4b0f044e88bca39207b3f6b769aaa799c"; \
@@ -58,7 +57,7 @@ RUN RUST_ARCH="x86_64-unknown-linux-gnu"; \
     RUST_VERSION=1.66.0; \
     /tmp/helpers/bin_getter "$RUST_INIT_URL" "$RUST_INIT_BIN" "$RUST_INIT_CHECKSUM"; \
     chmod +x $RUST_INIT_BIN; \
-    CARGO_HOME="/usr/local/cargo" "$RUST_INIT_BIN" \
+    CARGO_HOME="/usr/local/cargo" RUSTUP_HOME="/usr/local/rustup" "$RUST_INIT_BIN" \
         -y \
         --no-modify-path \
         --profile default \
