@@ -13,8 +13,7 @@ ARG CONTAINER_SHELL
 RUN groupadd --gid "$GID" "$USER"; \
     useradd --no-create-home --shell "$CONTAINER_SHELL" --uid "$UID" --gid "$GID" "$USER"; \
     usermod -aG sudo "$USER"; \
-    echo "$USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers; \
-
+    echo "$USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers;
 
 # Install Chezmoi
 RUN CHEZMOI_URL="https://github.com/twpayne/chezmoi/releases/download/v2.27.3/chezmoi-linux-amd64"; \
