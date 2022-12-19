@@ -9,7 +9,7 @@ then
 fi
 echo "BUILDING WITH USER: $CONTAINER_USER"
 
-DOCKER_BUILDKIT=1 docker build \
+docker build \
     --build-arg CONTAINER_USER="$CONTAINER_USER" \
     --build-arg CONTAINER_SHELL="$CONTAINER_SHELL" \
     -t kdevenv:1.0 .
