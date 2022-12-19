@@ -45,6 +45,8 @@ RUN LUA_LSP_URL="https://github.com/sumneko/lua-language-server/releases/downloa
 # Install Rust
 #
 # N.B.
+# tl;dr we leave the user to set their own $CARGO_HOME as well as point to the proper $RUSTUP_HOME.
+#
 # Note we don't set $CARGO_HOME globally, but rather just for installation.
 # This allows the Cargo binaries to be installed as part of the root file system.
 # But then the user can set $CARGO_HOME to something appropriate during runtime.
