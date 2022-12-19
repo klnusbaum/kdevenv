@@ -6,14 +6,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
 COPY ./helpers /tmp/helpers
 
 # Setup user account to mirror host user
-ARG USER
-ARG UID
-ARG GID
+ARG CONTAINER_USER
 ARG CONTAINER_SHELL
-RUN groupadd --gid "$GID" "$USER"; \
-    useradd --no-create-home --shell "$CONTAINER_SHELL" --uid "$UID" --gid "$GID" "$USER"; \
-    usermod -aG sudo "$USER"; \
-    echo "$USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers;
+RUN HOME_DIR="/home/$CONTAINER_USER"; \
+    useradd --no-create-home --groups sudo --shell "$CONTAINER_SHELL" "$CONTAINER_USER"; \
+    mkdir "$HOME_DIR"; \
+    chown "$CONTAINER_USER:$CONTAINER_USER" "$HOME_DIR"; \
+    echo "$CONTAINER_USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kdevenv;
 
 # Install Chezmoi
 RUN CHEZMOI_URL="https://github.com/twpayne/chezmoi/releases/download/v2.27.3/chezmoi-linux-amd64"; \

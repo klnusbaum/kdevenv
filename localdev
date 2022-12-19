@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 source "$(dirname ${BASH_SOURCE})/lib.sh"
+HOME_DIR="/home/$CONTAINER_USER"
 
 docker run -it --rm \
     -h kdevenv \
     --name liveenv \
     --env SHELL="$CONTAINER_SHELL" \
-    --volume "$HOME/devhome:$HOME" \
-    --workdir "$HOME" \
-    --user "$UID:$(id -g)" \
+    --volume "$HOME_VOLUME:$HOME_DIR" \
+    --workdir "$HOME_DIR" \
+    --user "$CONTAINER_USER" \
     kdevenv:1.0 \
     $CONTAINER_SHELL
