@@ -1,1 +1,1 @@
-export KDEVENV_VERSION="0.5.2"
+export KDEVENV_VERSION="0.5.3"
