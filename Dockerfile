@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM archlinux
 RUN pacman -Syu --noconfirm \
-        sudo openssh zsh man \
+        base-devel openssh zsh man \
         npm neovim git tree direnv jq lua-language-server rustup chezmoi
 
 # Setup user account to mirror host user
@@ -14,6 +14,7 @@ RUN HOME_DIR="/home/$CONTAINER_USER"; \
     echo "$CONTAINER_USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kdevenv;
 
 # Choose Rust toolchain
+ENV RUSTUP_HOME=/opt/rust
 RUN rustup default stable
 
 # Install docker lua-language-server
