@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
+
+set -euo pipefail
 source "$(dirname ${BASH_SOURCE})/lib.sh"
+source "$(dirname ${BASH_SOURCE})/version.sh"
 HOME_DIR="/home/$CONTAINER_USER"
 
 docker run -it --rm \
