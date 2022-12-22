@@ -8,7 +8,6 @@ if [ -z "$(docker volume ls --filter name=$HOME_VOLUME --format {{.Name}})" ];
 then
     docker volume create $HOME_VOLUME &> /dev/null
 fi
-echo "BUILDING WITH USER: $CONTAINER_USER"
 
 docker build \
     --build-arg CONTAINER_USER="$CONTAINER_USER" \
