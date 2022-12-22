@@ -12,5 +12,6 @@ docker run -it --rm \
     --volume "$HOME_VOLUME:$HOME_DIR" \
     --workdir "$HOME_DIR" \
     --user "$CONTAINER_USER" \
+    -p 8080:8080 \
     "kdevenv:${KDEVENV_VERSION}" \
     $CONTAINER_SHELL
