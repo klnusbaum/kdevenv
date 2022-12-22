@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
-FROM archlinux
+FROM archlinux:base
 RUN pacman -Syu --noconfirm \
-        base-devel openssh zsh man \
+        base-devel openssh zsh man bind \
         npm neovim git tree direnv jq chezmoi \
         lua-language-server \
-        rustup rust-analyzer
+        rustup rust-analyzer \
+        python python-lsp-server
 
 # Setup user account to mirror host user
 ARG CONTAINER_USER
