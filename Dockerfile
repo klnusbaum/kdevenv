@@ -1,7 +1,10 @@
 # syntax=docker/dockerfile:1
 FROM archlinux:base
+RUN sed -i '/share\/man/d' /etc/pacman.conf
+
 RUN pacman -Syu --noconfirm \
-        base-devel openssh zsh man bind \
+        base-devel openssh zsh bind \
+        man-db man-pages \
         npm neovim git tree direnv jq chezmoi \
         lua-language-server \
         rustup rust-analyzer \
