@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM archlinux:base
-RUN sed -i '/share\/man/d' /etc/pacman.conf
+RUN sed -i '/NoExtract  \= usr\/share\/man/d' /etc/pacman.conf
 
 RUN pacman -Syu --noconfirm \
         base-devel openssh zsh bind \
