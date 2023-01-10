@@ -9,13 +9,15 @@ then
     docker volume create $HOME_VOLUME &> /dev/null
 fi
 
-FIVE_DAYS_AGO=$(date --date="5 days ago" "+%Y-%m-%d")
+# new arch image builds are done every 7 days.
+# so we should wait at most 7 days before refreshing out docker image.
+SEVEN_DAYS_AGO=$(date --date="7 days ago" "+%Y-%m-%d")
 ARCH_CREATED_AT=$(docker images  --format "{{ .CreatedAt }}" archlinux:base | awk '{print $1}')
 
-FIVE_DAYS_AGO_UNIX=$(date -d $FIVE_DAYS_AGO +%s)
+SEVEN_DAYS_AGO_UNIX=$(date -d $SEVEN_DAYS_AGO +%s)
 ARCH_CREATED_AT_UNIX=$(date -d $ARCH_CREATED_AT +%s)
 
-if [ $FIVE_DAYS_AGO_UNIX -ge $ARCH_CREATED_AT_UNIX ]; then
+if [ $EIGHT_DAYS_AGO_UNIX -ge $ARCH_CREATED_AT_UNIX ]; then
     docker pull archlinux:base
 fi
 
