@@ -17,7 +17,7 @@ ARCH_CREATED_AT=$(docker images  --format "{{ .CreatedAt }}" archlinux:base | aw
 SEVEN_DAYS_AGO_UNIX=$(date -d $SEVEN_DAYS_AGO +%s)
 ARCH_CREATED_AT_UNIX=$(date -d $ARCH_CREATED_AT +%s)
 
-if [ $EIGHT_DAYS_AGO_UNIX -ge $ARCH_CREATED_AT_UNIX ]; then
+if [ $SEVEN_DAYS_AGO_UNIX -ge $ARCH_CREATED_AT_UNIX ]; then
     docker pull archlinux:base
 fi
 
