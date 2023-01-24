@@ -6,7 +6,7 @@ RUN pacman -Syu --noconfirm \
         base-devel openssh zsh bind \
         man-db man-pages \
         docker \
-        npm neovim git tree direnv jq chezmoi \
+        npm neovim git tree direnv jq chezmoi ripgrep \
         lua-language-server \
         rustup rust-analyzer \
         python python-lsp-server
