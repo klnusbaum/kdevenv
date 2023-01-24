@@ -5,16 +5,20 @@ RUN sed -i '/NoExtract  \= usr\/share\/man/d' /etc/pacman.conf
 RUN pacman -Syu --noconfirm \
         base-devel openssh zsh bind \
         man-db man-pages \
+        docker \
         npm neovim git tree direnv jq chezmoi \
         lua-language-server \
         rustup rust-analyzer \
         python python-lsp-server
 
+ARG DOCKER_GROUP_ID
+RUN groupmod -g "$DOCKER_GROUP_ID" docker
+
 # Setup user account to mirror host user
 ARG CONTAINER_USER
 ARG CONTAINER_SHELL
 RUN HOME_DIR="/home/$CONTAINER_USER"; \
-    useradd --no-create-home --shell "$CONTAINER_SHELL" "$CONTAINER_USER"; \
+    useradd --no-create-home -G docker --shell "$CONTAINER_SHELL" "$CONTAINER_USER"; \
     mkdir "$HOME_DIR"; \
     chown "$CONTAINER_USER:$CONTAINER_USER" "$HOME_DIR"; \
     echo "$CONTAINER_USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kdevenv;

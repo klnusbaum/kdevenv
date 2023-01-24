@@ -10,6 +10,7 @@ docker run -it --rm \
     --name liveenv \
     --env SHELL="$CONTAINER_SHELL" \
     --volume "$HOME_VOLUME:$HOME_DIR" \
+    --volume "/var/run/docker.sock:/var/run/docker.sock" \
     --workdir "$HOME_DIR" \
     --user "$CONTAINER_USER" \
     -p 8080:8080 \
