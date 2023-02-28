@@ -26,7 +26,8 @@ RUN HOME_DIR="/home/$CONTAINER_USER"; \
 # Choose Rust toolchain
 ENV RUSTUP_HOME=/opt/rust
 RUN rustup default stable; \
-    rustup component add rust-src;
+    rustup component add rust-src; \
+    rustup toolchain install nightly;
 
 # Install docker lua-language-server
 RUN npm install -g dockerfile-language-server-nodejs
