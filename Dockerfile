@@ -9,7 +9,8 @@ RUN pacman -Syu --noconfirm \
         npm neovim git tree direnv jq chezmoi ripgrep \
         lua-language-server \
         rustup rust-analyzer \
-        python python-lsp-server
+        python python-lsp-server \
+        typescript-language-server
 
 ARG DOCKER_GROUP_ID
 RUN groupmod -g "$DOCKER_GROUP_ID" docker
@@ -29,5 +30,5 @@ RUN rustup default stable; \
     rustup component add rust-src; \
     rustup toolchain install nightly;
 
-# Install docker lua-language-server
+# Install docker languages server
 RUN npm install -g dockerfile-language-server-nodejs
