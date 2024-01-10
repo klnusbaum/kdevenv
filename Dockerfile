@@ -3,7 +3,7 @@ FROM archlinux:base
 RUN sed -i '/NoExtract  \= usr\/share\/man/d' /etc/pacman.conf
 
 RUN pacman -Syu --noconfirm \
-        base-devel openssh zsh bind \
+        base-devel openssh zsh bind neofetch \
         man-db man-pages \
         docker \
         npm neovim git tree direnv jq chezmoi ripgrep \
@@ -31,4 +31,4 @@ RUN rustup default stable; \
     rustup toolchain install nightly;
 
 # Install docker languages server
-RUN npm install -g dockerfile-language-server-nodejs
+RUN npm install -g dockerfile-language-server-nodejs typescript-language-server typescript
