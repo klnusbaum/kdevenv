@@ -18,8 +18,7 @@ RUN groupmod -g "$DOCKER_GROUP_ID" docker
 # Setup user account to mirror host user
 ARG CONTAINER_USER
 ARG CONTAINER_SHELL
-RUN HOME_DIR="/home/$CONTAINER_USER"; \
-    useradd -G docker --shell "$CONTAINER_SHELL" -mk /dev/null "$CONTAINER_USER"; \
+RUN useradd -G docker --shell "$CONTAINER_SHELL" -mk /dev/null "$CONTAINER_USER"; \
     echo "$CONTAINER_USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kdevenv;
 
 # Choose Rust toolchain
