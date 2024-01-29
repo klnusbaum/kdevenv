@@ -15,7 +15,7 @@ if [ ! -d "$KEYS_DIR" ]; then
 fi
 
 if [ ! -f $KEYS_DIR/$USER_SSH_KEY_NAME.pub ]; then
-    ssh-keygen -t ed25519 -f "$KEYS_DIR/$USER_KEY_NAME" -N "" -C "$CONTAINER_USER@kdevenv"
+    ssh-keygen -t ed25519 -f "$KEYS_DIR/$USER_SSH_KEY_NAME" -N "" -C "$CONTAINER_USER@kdevenv"
 fi
 
 if [ ! -f $KEYS_DIR/$HOST_SSH_KEY_NAME.pub ]; then
