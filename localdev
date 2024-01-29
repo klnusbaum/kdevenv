@@ -8,7 +8,7 @@ readonly CONTAINER_NAME="liveenv"
 
 readonly IS_RUNNING="$(docker container inspect -f '{{.State.Running}}' $CONTAINER_NAME 2> /dev/null)"
 if [ "$IS_RUNNING" != "true" ]; then
-    docker run -q -itd --rm \
+    docker run -itd --rm \
         -h kdevenv \
         --name $CONTAINER_NAME \
         --volume "$HOME_VOLUME:$HOME_DIR" \
