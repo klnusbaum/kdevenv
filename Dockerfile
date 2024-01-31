@@ -37,5 +37,5 @@ RUN npm install -g dockerfile-language-server-nodejs typescript-language-server 
 ARG USER_SSH_KEY_NAME
 COPY --chown=$CONTAINER_USER:$CONTAINER_USER ./keys/${USER_SSH_KEY_NAME}.pub /home/$CONTAINER_USER/.ssh/authorized_keys
 
-EXPOSE 22
+EXPOSE 22/tcp
 CMD ["/usr/sbin/sshd", "-D"]
