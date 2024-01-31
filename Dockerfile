@@ -7,7 +7,8 @@ ENV RUSTUP_HOME=/opt/rust
 RUN pacman -Syu --noconfirm rustup rust-analyzer; \
     rustup default stable; \
     rustup component add rust-src; \
-    rustup toolchain install nightly;
+    rustup toolchain install nightly; \
+    echo "export RUSTUP_HOME=$RUSTUP_HOME" >> /etc/profile.d/rustenv.sh
 
 RUN pacman -Syu --noconfirm \
         base-devel openssh zsh bind neofetch \
