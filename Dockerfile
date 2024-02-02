@@ -18,7 +18,7 @@ RUN pacman -Syu --noconfirm \
         npm neovim git tree direnv jq chezmoi ripgrep \
         lua-language-server \
         python python-lsp-server \
-        typescript-language-server
+        shellcheck
 
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
