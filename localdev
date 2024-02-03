@@ -1,21 +1,12 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-source "$(dirname ${BASH_SOURCE})/lib.sh"
-source "$(dirname ${BASH_SOURCE})/version.sh"
-HOME_DIR="/home/$CONTAINER_USER"
-readonly CONTAINER_NAME="liveenv"
+SCRIPT_DIR="$(dirname ${BASH_SOURCE})"
+source "$SCRIPT_DIR/lib.sh"
 
 readonly IS_RUNNING="$(docker container inspect -f '{{.State.Running}}' $CONTAINER_NAME 2> /dev/null)"
 if [ "$IS_RUNNING" != "true" ]; then
-    docker run -d --rm \
-        -h kdevenv \
-        --name $CONTAINER_NAME \
-        --volume "$HOME_VOLUME:$HOME_DIR" \
-        --volume "/var/run/docker.sock:/var/run/docker.sock" \
-        -p 8080:8080 \
-        -p 3000:22 \
-        "kdevenv:${KDEVENV_VERSION}" > /dev/null
+  $SCRIPT_DIR/start.sh
 fi
 
 ssh -i keys/$USER_SSH_KEY_NAME -p 3000 devuser@localhost
