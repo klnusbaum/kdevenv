@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-SCRIPT_DIR="$(dirname ${BASH_SOURCE})"
+SCRIPT_DIR="$(dirname ${BASH_SOURCE})/scripts"
 source "$SCRIPT_DIR/lib.sh"
 
 readonly IS_RUNNING="$(docker container inspect -f '{{.State.Running}}' $CONTAINER_NAME 2> /dev/null)"
