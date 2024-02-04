@@ -1,8 +1,9 @@
 #!/usr/bin/env bash 
 set euo -pipefail
 
-source "$(dirname ${BASH_SOURCE})/lib.sh"
-source "$(dirname ${BASH_SOURCE})/version.sh"
+SCRIPT_DIR="$(dirname ${BASH_SOURCE})/scripts"
+source "$SCRIPT_DIR/lib.sh"
+source "$SCRIPT_DIR/version.sh"
 readonly KEYS_DIR="$(dirname ${BASH_SOURCE})/keys"
 
 if [ -z "$(docker volume ls --filter name=$HOME_VOLUME --format {{.Name}})" ];
