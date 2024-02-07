@@ -14,12 +14,13 @@ RUN pacman -Syu --noconfirm \
         base-devel openssh zsh bind neofetch \
         man-db man-pages \
         kitty-terminfo \
+        go gopls \
         docker \
         npm neovim git tree direnv jq chezmoi ripgrep \
         lua-language-server \
         python python-lsp-server \
         typescript typescript-language-server \
-        shellcheck bash-language-server
+        shellcheck shfmt bash-language-server
 
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
