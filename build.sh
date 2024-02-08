@@ -1,25 +1,25 @@
 #!/usr/bin/env bash 
-set euo -pipefail
+set -euo pipefail
 
-SCRIPT_DIR="$(dirname ${BASH_SOURCE})/scripts"
+SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")/scripts"
 source "$SCRIPT_DIR/lib.sh"
 source "$SCRIPT_DIR/version.sh"
-readonly KEYS_DIR="$(dirname ${BASH_SOURCE})/keys"
+KEYS_DIR="$(dirname "${BASH_SOURCE[0]}")/keys"
 
-if [ -z "$(docker volume ls --filter name=$HOME_VOLUME --format {{.Name}})" ];
+if [ -z "$(docker volume ls --filter name="$HOME_VOLUME" --format "{{.Name}}")" ];
 then
-    docker volume create $HOME_VOLUME &> /dev/null
+    docker volume create "$HOME_VOLUME" &> /dev/null
 fi
 
 if [ ! -d "$KEYS_DIR" ]; then
     mkdir "$KEYS_DIR"
 fi
 
-if [ ! -f $KEYS_DIR/$USER_SSH_KEY_NAME.pub ]; then
+if [ ! -f "$KEYS_DIR/$USER_SSH_KEY_NAME.pub" ]; then
     ssh-keygen -t ed25519 -f "$KEYS_DIR/$USER_SSH_KEY_NAME" -N "" -C "$CONTAINER_USER@kdevenv"
 fi
 
-if [ ! -f $KEYS_DIR/$HOST_SSH_KEY_NAME.pub ]; then
+if [ ! -f "$KEYS_DIR/$HOST_SSH_KEY_NAME.pub" ]; then
     ssh-keygen -t ed25519 -f "$KEYS_DIR/$HOST_SSH_KEY_NAME" -N "" -C "root@kdevenv"
 fi
 
@@ -28,10 +28,10 @@ fi
 SEVEN_DAYS_AGO=$(date --date="7 days ago" "+%Y-%m-%d")
 ARCH_CREATED_AT=$(docker images  --format "{{ .CreatedAt }}" archlinux:base | awk '{print $1}')
 
-SEVEN_DAYS_AGO_UNIX=$(date -d $SEVEN_DAYS_AGO +%s)
-ARCH_CREATED_AT_UNIX=$(date -d $ARCH_CREATED_AT +%s)
+SEVEN_DAYS_AGO_UNIX=$(date -d "$SEVEN_DAYS_AGO" +%s)
+ARCH_CREATED_AT_UNIX=$(date -d "$ARCH_CREATED_AT" +%s)
 
-if [ $SEVEN_DAYS_AGO_UNIX -ge $ARCH_CREATED_AT_UNIX ]; then
+if [ "$SEVEN_DAYS_AGO_UNIX" -ge "$ARCH_CREATED_AT_UNIX" ]; then
     docker pull archlinux:base
 fi
 
