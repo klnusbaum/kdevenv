@@ -12,16 +12,16 @@ RUN pacman -Syu --noconfirm rustup rust-analyzer; \
     echo "export RUSTUP_HOME=$RUSTUP_HOME" >> /etc/profile.d/rustenv.sh
 
 RUN pacman -Syu --noconfirm \
-        base-devel openssh zsh bind neofetch \
-        man-db man-pages \
-        kitty-terminfo \
-        go gopls \
-        docker \
-        npm neovim git tree direnv jq chezmoi ripgrep \
-        lua-language-server \
-        python python-lsp-server \
-        typescript typescript-language-server \
-        shellcheck shfmt bash-language-server
+    base-devel openssh zsh bind neofetch \
+    man-db man-pages \
+    kitty-terminfo \
+    go gopls \
+    docker \
+    npm neovim git tree direnv jq chezmoi ripgrep \
+    lua-language-server \
+    python python-lsp-server \
+    typescript typescript-language-server \
+    shellcheck shfmt bash-language-server
 
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
