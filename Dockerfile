@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM archlinux:base
-RUN sed -i '/NoExtract  \= usr\/share\/man/d' /etc/pacman.conf
+RUN sed -i '/NoExtract  \= usr\/share\/man/d' /etc/pacman.conf; \
+    ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 
 # Install rust and choose Rust toolchain
 ENV RUSTUP_HOME=/opt/rust
