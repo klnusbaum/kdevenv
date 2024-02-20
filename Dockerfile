@@ -5,7 +5,7 @@ RUN sed -i '/NoExtract  \= usr\/share\/man/d' /etc/pacman.conf; \
 
 # Install rust and choose Rust toolchain
 ENV RUSTUP_HOME=/opt/rust
-RUN pacman -Syu --noconfirm rustup rust-analyzer; \
+RUN pacman -Syu --noconfirm rustup rust-analyzer cargo-watch; \
     rustup default stable; \
     rustup component add rust-src; \
     rustup toolchain install nightly; \
