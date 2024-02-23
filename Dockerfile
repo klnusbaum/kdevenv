@@ -36,7 +36,8 @@ RUN useradd -G docker --shell "$CONTAINER_SHELL" -mk /dev/null "$CONTAINER_USER"
     echo "$CONTAINER_USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kdevenv;
 
 # Install docker languages server
-RUN npm install -g dockerfile-language-server-nodejs
+# note vscode-langservers-extracted is for HTML/CSS/JSON/ESLint
+RUN npm install -g dockerfile-language-server-nodejs vscode-langservers-extracted
 
 ARG USER_SSH_KEY_NAME
 COPY --chown=$CONTAINER_USER:$CONTAINER_USER ./keys/${USER_SSH_KEY_NAME}.pub /home/$CONTAINER_USER/.ssh/authorized_keys
