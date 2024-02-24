@@ -21,7 +21,8 @@ RUN pacman -Syu --noconfirm \
     lua-language-server \
     python python-lsp-server \
     typescript typescript-language-server \
-    shellcheck shfmt bash-language-server
+    shellcheck shfmt bash-language-server \
+    tailwindcss-language-server
 
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
