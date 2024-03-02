@@ -1,5 +1,5 @@
 export CONTAINER_SHELL=/bin/zsh
-export CONTAINER_USER="devuser"
+export CONTAINER_USER="kurtis"
 export CONTAINER_NAME="liveenv"
 export HOME_VOLUME="devhome"
 export USER_SSH_KEY_NAME="dev_ed25519"

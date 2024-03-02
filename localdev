@@ -9,4 +9,4 @@ if [ "$IS_RUNNING" != "true" ]; then
   $SCRIPT_DIR/start.sh
 fi
 
-ssh -i keys/$USER_SSH_KEY_NAME -p 3000 devuser@localhost
+ssh -i keys/$USER_SSH_KEY_NAME -p 3000 "$CONTAINER_USER@localhost"
