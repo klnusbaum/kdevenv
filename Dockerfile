@@ -12,7 +12,7 @@ RUN pacman -Syu --noconfirm rustup rust-analyzer cargo-watch; \
     echo "export RUSTUP_HOME=$RUSTUP_HOME" >> /etc/profile.d/rustenv.sh
 
 RUN pacman -Syu --noconfirm \
-    base-devel openssh zsh bind neofetch \
+    base-devel openssh zsh bind neofetch wget \
     man-db man-pages \
     kitty-terminfo \
     go gopls \
