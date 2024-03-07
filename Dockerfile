@@ -24,6 +24,13 @@ RUN pacman -Syu --noconfirm \
     shellcheck shfmt bash-language-server \
     tailwindcss-language-server
 
+RUN curl -sSL https://github.com/emcrisostomo/fswatch/releases/download/1.17.1/fswatch-1.17.1.tar.gz | tar xz -C /tmp; \
+    pushd /tmp/fswatch-1.17.1; \
+    ./configure --prefix=/usr; \
+    make install; \
+    popd; \
+    rm -rf /tmp/fswatch-1.17.1;
+
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
 
