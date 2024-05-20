@@ -17,12 +17,14 @@ RUN pacman -Syu --noconfirm \
     kitty-terminfo \
     go gopls \
     docker \
+    inetutils \
     npm neovim git tree direnv jq chezmoi ripgrep \
     lua-language-server \
     python python-lsp-server \
     typescript typescript-language-server \
     shellcheck shfmt bash-language-server \
-    tailwindcss-language-server
+    tailwindcss-language-server \
+    texlive-latexrecommended texlive-binextra
 
 RUN curl -sSL https://github.com/emcrisostomo/fswatch/releases/download/1.17.1/fswatch-1.17.1.tar.gz | tar xz -C /tmp; \
     pushd /tmp/fswatch-1.17.1; \
