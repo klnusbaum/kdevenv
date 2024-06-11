@@ -6,6 +6,24 @@ source "$SCRIPT_DIR/lib.sh"
 source "$SCRIPT_DIR/version.sh"
 KEYS_DIR="$(dirname "${BASH_SOURCE[0]}")/keys"
 
+seven_days_ago () {
+    if [[ $OSTYPE == 'darwin'* ]]; then
+        date -v-7d +%s
+    else
+        date -d "7 days ago" +%s
+    fi
+}
+
+format_docker_date() {
+    if [[ "$1" == '' ]]; then
+        echo "0"
+    elif [[ $OSTYPE == 'darwin'* ]]; then
+        date -f "%Y-%m-%d %H:%M:%S %z %Z" -j "$1" +%s
+    else
+        date -d "$1" +%s
+    fi
+}
+
 if [ -z "$(docker volume ls --filter name="$HOME_VOLUME" --format "{{.Name}}")" ];
 then
     docker volume create "$HOME_VOLUME" &> /dev/null
@@ -25,13 +43,9 @@ fi
 
 # new arch image builds are done every 7 days.
 # so we should wait at most 7 days before refreshing out docker image.
-SEVEN_DAYS_AGO=$(date --date="7 days ago" "+%Y-%m-%d")
 ARCH_CREATED_AT=$(docker images  --format "{{ .CreatedAt }}" archlinux:base | awk '{print $1}')
-
-SEVEN_DAYS_AGO_UNIX=$(date -d "$SEVEN_DAYS_AGO" +%s)
-ARCH_CREATED_AT_UNIX=$(date -d "$ARCH_CREATED_AT" +%s)
-
-if [ "$SEVEN_DAYS_AGO_UNIX" -ge "$ARCH_CREATED_AT_UNIX" ]; then
+ARCH_CREATED_AT_UNIX=$(format_docker_date "$ARCH_CREATED_AT")
+if [ "$(seven_days_ago)" -ge "$ARCH_CREATED_AT_UNIX" ]; then
     docker pull archlinux:base
 fi
 
