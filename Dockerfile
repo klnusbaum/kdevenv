@@ -24,7 +24,8 @@ RUN pacman -Syu --noconfirm \
     typescript typescript-language-server \
     shellcheck shfmt bash-language-server \
     tailwindcss-language-server \
-    texlive-latexrecommended texlive-binextra
+    texlive-latexrecommended texlive-binextra \
+    tree-sitter-cli
 
 RUN curl -sSL https://github.com/emcrisostomo/fswatch/releases/download/1.17.1/fswatch-1.17.1.tar.gz | tar xz -C /tmp; \
     pushd /tmp/fswatch-1.17.1; \
