@@ -46,11 +46,10 @@ fi
 ARCH_CREATED_AT=$(docker images  --format "{{ .CreatedAt }}" archlinux:base | awk '{print $1}')
 ARCH_CREATED_AT_UNIX=$(format_docker_date "$ARCH_CREATED_AT")
 if [ "$(seven_days_ago)" -ge "$ARCH_CREATED_AT_UNIX" ]; then
-    #Arch only supports amd64 so explicitly specify it
-    docker pull --platform linux/amd64 archlinux:base
+    docker pull --platform "$PLATFORM" archlinux:base
 fi
 
-docker build \
+docker build --platform "$PLATFORM" \
     --build-arg CONTAINER_USER="$CONTAINER_USER" \
     --build-arg CONTAINER_SHELL="$CONTAINER_SHELL" \
     --build-arg HOST_SSH_KEY_NAME="$HOST_SSH_KEY_NAME" \

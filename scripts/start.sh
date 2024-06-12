@@ -7,6 +7,7 @@ source "$(dirname ${BASH_SOURCE})/version.sh"
 HOME_DIR="/home/$CONTAINER_USER"
 
 docker run -d --rm \
+    --platform "$PLATFORM" \
     -h kdevenv \
     --name $CONTAINER_NAME \
     --volume "$HOME_VOLUME:$HOME_DIR" \
