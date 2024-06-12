@@ -50,12 +50,9 @@ if [ "$(seven_days_ago)" -ge "$ARCH_CREATED_AT_UNIX" ]; then
     docker pull --platform linux/amd64 archlinux:base
 fi
 
-DOCKER_GROUP_ID="$(getent group docker | cut -d: -f3)"
-
 docker build \
     --build-arg CONTAINER_USER="$CONTAINER_USER" \
     --build-arg CONTAINER_SHELL="$CONTAINER_SHELL" \
-    --build-arg DOCKER_GROUP_ID="$DOCKER_GROUP_ID" \
     --build-arg HOST_SSH_KEY_NAME="$HOST_SSH_KEY_NAME" \
     --build-arg USER_SSH_KEY_NAME="$USER_SSH_KEY_NAME" \
     -t "kdevenv:${KDEVENV_VERSION}" .
