@@ -18,7 +18,7 @@ format_docker_date() {
     if [[ "$1" == '' ]]; then
         echo "0"
     elif [[ $OSTYPE == 'darwin'* ]]; then
-        date -f "%Y-%m-%d %H:%M:%S %z %Z" -j "$1" +%s
+        date -f "%Y-%m-%d" -j "$1" +%s
     else
         date -d "$1" +%s
     fi
