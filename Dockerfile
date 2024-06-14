@@ -15,6 +15,7 @@ RUN pacman -Syu --noconfirm \
     base-devel openssh zsh bind neofetch wget \
     man-db man-pages \
     kitty-terminfo \
+    github-cli \
     go gopls \
     docker \
     inetutils \
