@@ -40,7 +40,10 @@ RUN useradd --shell "$CONTAINER_SHELL" -mk /dev/null "$CONTAINER_USER"; \
 
 # Install docker languages server
 # note vscode-langservers-extracted is for HTML/CSS/JSON/ESLint
-RUN npm install -g dockerfile-language-server-nodejs vscode-langservers-extracted
+RUN npm install -g \
+    dockerfile-language-server-nodejs \
+    vscode-langservers-extracted \
+    @withgraphite/graphite-cli@stable
 
 ARG USER_SSH_KEY_NAME
 COPY --chown=$CONTAINER_USER:$CONTAINER_USER ./keys/${USER_SSH_KEY_NAME}.pub /home/$CONTAINER_USER/.ssh/authorized_keys
