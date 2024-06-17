@@ -16,6 +16,7 @@ RUN pacman -Syu --noconfirm \
     man-db man-pages \
     kitty-terminfo \
     github-cli \
+    kubectl kubectx \
     go gopls \
     docker \
     inetutils \
