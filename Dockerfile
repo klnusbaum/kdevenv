@@ -17,8 +17,9 @@ RUN pacman -Syu --noconfirm \
     kitty-terminfo \
     github-cli \
     kubectl kubectx \
+    docker \
     go gopls \
-    inetutils \
+    inetutils socat \
     npm neovim git tree direnv jq chezmoi ripgrep \
     lua-language-server \
     python python-lsp-server \
@@ -34,7 +35,7 @@ COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
 # Setup user account to mirror host user
 ARG CONTAINER_USER
 ARG CONTAINER_SHELL
-RUN useradd --shell "$CONTAINER_SHELL" -mk /dev/null "$CONTAINER_USER"; \
+RUN useradd -G docker --shell "$CONTAINER_SHELL" -mk /dev/null "$CONTAINER_USER"; \
     echo "$CONTAINER_USER            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kdevenv;
 
 # Install docker languages server
@@ -47,6 +48,7 @@ RUN npm install -g \
 ARG USER_SSH_KEY_NAME
 COPY --chown=$CONTAINER_USER:$CONTAINER_USER ./keys/${USER_SSH_KEY_NAME}.pub /home/$CONTAINER_USER/.ssh/authorized_keys
 
+COPY includes/server.sh /usr/local/sbin/server.sh
+
 EXPOSE 22/tcp
-ENTRYPOINT [ "/usr/sbin/sshd" ] 
-CMD ["-D" ]
+ENTRYPOINT [ "/usr/local/sbin/server.sh" ]
