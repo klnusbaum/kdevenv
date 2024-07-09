@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-source "$(dirname ${BASH_SOURCE})/lib.sh"
-source "$(dirname ${BASH_SOURCE})/version.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/version.sh"
 HOME_DIR="/home/$CONTAINER_USER"
 
 docker run -d --rm \
