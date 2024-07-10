@@ -27,7 +27,8 @@ RUN pacman -Syu --noconfirm \
     shellcheck shfmt bash-language-server \
     tailwindcss-language-server \
     texlive-latexrecommended texlive-binextra \
-    tree-sitter-cli
+    tree-sitter-cli \
+    imagemagick
 
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
