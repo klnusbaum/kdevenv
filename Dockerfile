@@ -11,23 +11,27 @@ RUN pacman -Syu --noconfirm rustup rust-analyzer cargo-watch; \
     rustup toolchain install nightly; \
     echo "export RUSTUP_HOME=$RUSTUP_HOME" >> /etc/profile.d/rustenv.sh
 
+# Core packages that don't change often
 RUN pacman -Syu --noconfirm \
     base-devel openssh zsh bind neofetch wget \
     man-db man-pages \
+    docker \
+    go gopls \
+    npm neovim git tree direnv jq chezmoi ripgrep fd \
+    tree-sitter-cli
+
+# Additional tools
+RUN pacman -Syu --noconfirm \
     kitty-terminfo \
     github-cli \
     kubectl kubectx \
-    docker \
-    go gopls \
-    inetutils socat \
-    npm neovim git tree direnv jq chezmoi ripgrep \
+    tcpdump inetutils socat \
     lua-language-server \
     python python-lsp-server \
     typescript typescript-language-server \
     shellcheck shfmt bash-language-server \
     tailwindcss-language-server \
     texlive-latexrecommended texlive-binextra \
-    tree-sitter-cli \
     imagemagick
 
 ARG HOST_SSH_KEY_NAME
