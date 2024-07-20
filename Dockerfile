@@ -34,6 +34,9 @@ RUN pacman -Syu --noconfirm \
     texlive-latexrecommended texlive-binextra \
     imagemagick
 
+RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
+    chmod 755 /usr/bin/buildifier
+
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
 
