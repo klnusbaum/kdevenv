@@ -31,11 +31,13 @@ RUN pacman -Syu --noconfirm \
     typescript typescript-language-server \
     shellcheck shfmt bash-language-server \
     tailwindcss-language-server \
-    texlive-latexrecommended texlive-binextra \
     imagemagick
 
 RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
     chmod 755 /usr/bin/buildifier
+
+RUN curl -sSfL https://github.com/abhinav/git-spice/releases/download/v0.2.0/git-spice.Linux-x86_64.tar.gz | tar xz -C /usr/bin; \
+    chmod 755 /usr/bin/gs
 
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
