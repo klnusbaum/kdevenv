@@ -15,6 +15,7 @@ RUN pacman -Syu --noconfirm rustup rust-analyzer cargo-watch; \
 RUN pacman -Syu --noconfirm \
     base-devel openssh zsh bind neofetch wget \
     man-db man-pages \
+    unzip htop \
     docker \
     go gopls \
     npm neovim git tree direnv jq chezmoi ripgrep fd \
