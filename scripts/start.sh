@@ -13,5 +13,6 @@ docker run -d --rm \
     --volume "$HOME_VOLUME:$HOME_DIR" \
     --volume "/var/run/docker.sock:/var/run/host_docker.sock" \
     -p 8080:8080 \
-    -p 3000:22 \
+    -p 3000:3000 \
+    -p 2222:22 \
     "kdevenv:${KDEVENV_VERSION}" >/dev/null
