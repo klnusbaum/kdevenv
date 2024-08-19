@@ -32,7 +32,8 @@ RUN pacman -Syu --noconfirm \
     typescript typescript-language-server \
     shellcheck shfmt bash-language-server \
     tailwindcss-language-server \
-    imagemagick
+    imagemagick \
+    sops
 
 RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
     chmod 755 /usr/bin/buildifier; \
