@@ -33,7 +33,8 @@ RUN pacman -Syu --noconfirm \
     shellcheck shfmt bash-language-server \
     tailwindcss-language-server \
     imagemagick \
-    sops
+    sops \
+    terraform
 
 RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
     chmod 755 /usr/bin/buildifier; \
@@ -41,6 +42,11 @@ RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2
     chmod 755 /usr/bin/gs; \
     curl -sSfL https://github.com/miniscruff/changie/releases/download/v1.19.1/changie_1.19.1_linux_amd64.tar.gz | tar xz -C /usr/bin; \
     chmod 755 /usr/bin/changie
+
+RUN curl -fsSL https://github.com/hashicorp/terraform-ls/archive/refs/tags/v0.34.2.tar.gz | tar xz -C /tmp; \
+    go build -C /tmp/terraform-ls-0.34.2; \
+    mv /tmp/terraform-ls-0.34.2/terraform-ls /usr/bin; \
+    chmod 755 /usr/bin/terraform-ls
 
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
