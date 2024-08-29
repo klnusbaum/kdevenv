@@ -19,7 +19,8 @@ RUN pacman -Syu --noconfirm \
     docker \
     go gopls \
     npm neovim git tree direnv jq chezmoi ripgrep fd \
-    tree-sitter-cli
+    tree-sitter-cli \
+    moreutils
 
 # Additional tools
 RUN pacman -Syu --noconfirm \
