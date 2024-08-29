@@ -35,7 +35,8 @@ RUN pacman -Syu --noconfirm \
     tailwindcss-language-server \
     imagemagick \
     sops \
-    terraform
+    terraform packer \
+    yaml-language-server
 
 RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
     chmod 755 /usr/bin/buildifier; \
