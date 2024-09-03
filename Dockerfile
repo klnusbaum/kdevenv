@@ -43,7 +43,11 @@ RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2
     curl -sSfL https://github.com/abhinav/git-spice/releases/download/v0.5.1/git-spice.Linux-x86_64.tar.gz | tar xz -C /usr/bin; \
     chmod 755 /usr/bin/gs; \
     curl -sSfL https://github.com/miniscruff/changie/releases/download/v1.19.1/changie_1.19.1_linux_amd64.tar.gz | tar xz -C /usr/bin; \
-    chmod 755 /usr/bin/changie
+    chmod 755 /usr/bin/changie; \
+    curl -sSfL https://github.com/minamijoyo/tfupdate/releases/download/v0.8.5/tfupdate_0.8.5_linux_amd64.tar.gz | tar xz -C /usr/bin tfupdate; \
+    chmod 755 /usr/bin/tfupdate; \
+    curl -sSfL https://github.com/minamijoyo/tfmigrate/releases/download/v0.3.24/tfmigrate_0.3.24_linux_amd64.tar.gz | tar xz -C /usr/bin tfmigrate; \
+    chmod 755 /usr/bin/tfmigrate
 
 RUN curl -fsSL https://github.com/hashicorp/terraform-ls/archive/refs/tags/v0.34.2.tar.gz | tar xz -C /tmp; \
     go build -C /tmp/terraform-ls-0.34.2; \
