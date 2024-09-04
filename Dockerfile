@@ -47,12 +47,12 @@ RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2
     curl -sSfL https://github.com/minamijoyo/tfupdate/releases/download/v0.8.5/tfupdate_0.8.5_linux_amd64.tar.gz | tar xz -C /usr/bin tfupdate; \
     chmod 755 /usr/bin/tfupdate; \
     curl -sSfL https://github.com/minamijoyo/tfmigrate/releases/download/v0.3.24/tfmigrate_0.3.24_linux_amd64.tar.gz | tar xz -C /usr/bin tfmigrate; \
-    chmod 755 /usr/bin/tfmigrate
+    chmod 755 /usr/bin/tfmigrate; \
+    curl -fsSL https://releases.hashicorp.com/terraform-ls/0.34.3/terraform-ls_0.34.3_linux_amd64.zip -o /tmp/terraform-ls.zip; \
+    unzip -d /usr/bin/ /tmp/terraform-ls.zip terraform-ls; \
+    chomd 755 /usr/bin/terraform-ls; \
+    rm /tmp/terraform-ls.zip
 
-RUN curl -fsSL https://github.com/hashicorp/terraform-ls/archive/refs/tags/v0.34.2.tar.gz | tar xz -C /tmp; \
-    go build -C /tmp/terraform-ls-0.34.2; \
-    mv /tmp/terraform-ls-0.34.2/terraform-ls /usr/bin; \
-    chmod 755 /usr/bin/terraform-ls
 
 ARG HOST_SSH_KEY_NAME
 COPY ./keys/${HOST_SSH_KEY_NAME}* /etc/ssh/
