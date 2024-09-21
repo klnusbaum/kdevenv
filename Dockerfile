@@ -27,7 +27,7 @@ RUN pacman -Syu --noconfirm \
     kitty-terminfo \
     github-cli \
     kubectl kubectx \
-    tcpdump inetutils socat \
+    tcpdump inetutils socat lsof \
     lua-language-server \
     python python-lsp-server \
     typescript typescript-language-server \
