@@ -35,7 +35,7 @@ RUN pacman -Syu --noconfirm \
     tailwindcss-language-server \
     imagemagick \
     sops \
-    terraform packer \
+    packer \
     yaml-language-server
 
 RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
@@ -44,14 +44,19 @@ RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2
     chmod 755 /usr/bin/gs; \
     curl -sSfL https://github.com/miniscruff/changie/releases/download/v1.19.1/changie_1.19.1_linux_amd64.tar.gz | tar xz -C /usr/bin; \
     chmod 755 /usr/bin/changie; \
-    curl -sSfL https://github.com/minamijoyo/tfupdate/releases/download/v0.8.5/tfupdate_0.8.5_linux_amd64.tar.gz | tar xz -C /usr/bin tfupdate; \
-    chmod 755 /usr/bin/tfupdate; \
-    curl -sSfL https://github.com/minamijoyo/tfmigrate/releases/download/v0.3.24/tfmigrate_0.3.24_linux_amd64.tar.gz | tar xz -C /usr/bin tfmigrate; \
-    chmod 755 /usr/bin/tfmigrate; \
+    # pinned terraform for chronosphere work
+    curl -fsSL https://releases.hashicorp.com/terraform/1.9.6/terraform_1.9.6_linux_amd64.zip -o /tmp/terraform.zip; \
+    unzip -d /usr/bin/ /tmp/terraform.zip terraform; \
+    chomd 755 /usr/bin/terraform; \
+    rm /tmp/terraform-ls.zip \
     curl -fsSL https://releases.hashicorp.com/terraform-ls/0.34.3/terraform-ls_0.34.3_linux_amd64.zip -o /tmp/terraform-ls.zip; \
     unzip -d /usr/bin/ /tmp/terraform-ls.zip terraform-ls; \
     chomd 755 /usr/bin/terraform-ls; \
-    rm /tmp/terraform-ls.zip
+    rm /tmp/terraform-ls.zip \
+    curl -sSfL https://github.com/minamijoyo/tfupdate/releases/download/v0.8.5/tfupdate_0.8.5_linux_amd64.tar.gz | tar xz -C /usr/bin tfupdate; \
+    chmod 755 /usr/bin/tfupdate; \
+    curl -sSfL https://github.com/minamijoyo/tfmigrate/releases/download/v0.3.24/tfmigrate_0.3.24_linux_amd64.tar.gz | tar xz -C /usr/bin tfmigrate; \
+    chmod 755 /usr/bin/tfmigrate;
 
 
 ARG HOST_SSH_KEY_NAME
