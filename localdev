@@ -9,4 +9,11 @@ if [ "$IS_RUNNING" != "true" ]; then
   $SCRIPT_DIR/start.sh
 fi
 
+# Even though the container has started, ssh might not be ready yet.
+# So we wait until we're sure its ready.
+until [ "$(ssh -i keys/$USER_SSH_KEY_NAME -p 2222  "$CONTAINER_USER@localhost" echo 'running')" == "running" ]
+do
+    sleep 1
+done
+
 ssh -A -i keys/$USER_SSH_KEY_NAME -p 2222 "$CONTAINER_USER@localhost"
