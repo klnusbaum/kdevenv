@@ -55,7 +55,9 @@ RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2
     curl -sSfL https://github.com/minamijoyo/tfupdate/releases/download/v0.8.5/tfupdate_0.8.5_linux_amd64.tar.gz | tar xz -C /usr/bin tfupdate; \
     chmod 755 /usr/bin/tfupdate; \
     curl -sSfL https://github.com/minamijoyo/tfmigrate/releases/download/v0.3.24/tfmigrate_0.3.24_linux_amd64.tar.gz | tar xz -C /usr/bin tfmigrate; \
-    chmod 755 /usr/bin/tfmigrate
+    chmod 755 /usr/bin/tfmigrate; \
+    curl -fsSL https://storage.googleapis.com/chronosphere-release/latest/chronoctl-linux-amd64 -o /usr/local/bin/chronoctl; \
+    chmod +x /usr/local/bin/chronoctl;
 
 
 ARG HOST_SSH_KEY_NAME
