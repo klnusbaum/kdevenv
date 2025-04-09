@@ -35,8 +35,7 @@ RUN pacman -Syu --noconfirm \
     tailwindcss-language-server \
     imagemagick \
     sops \
-    packer \
-    yaml-language-server
+    packer
 
 RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
     chmod 755 /usr/bin/buildifier; \
@@ -72,7 +71,8 @@ RUN useradd -G docker --shell "$CONTAINER_SHELL" -mk /dev/null "$CONTAINER_USER"
 # note vscode-langservers-extracted is for HTML/CSS/JSON/ESLint
 RUN npm install -g \
     dockerfile-language-server-nodejs \
-    vscode-langservers-extracted
+    vscode-langservers-extracted \
+    yaml-language-server
 
 ARG USER_SSH_KEY_NAME
 COPY --chown=$CONTAINER_USER:$CONTAINER_USER ./keys/${USER_SSH_KEY_NAME}.pub /home/$CONTAINER_USER/.ssh/authorized_keys
