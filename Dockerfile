@@ -13,7 +13,7 @@ RUN pacman -Syu --noconfirm rustup rust-analyzer cargo-watch; \
 
 # Core packages that don't change often
 RUN pacman -Syu --noconfirm \
-    base-devel openssh zsh bind neofetch wget \
+    base-devel openssh zsh bind wget \
     man-db man-pages \
     unzip htop \
     docker \
