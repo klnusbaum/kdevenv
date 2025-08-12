@@ -18,7 +18,7 @@ RUN pacman -Syu --noconfirm \
     unzip htop \
     docker \
     go gopls \
-    npm neovim git tree direnv jq chezmoi ripgrep fd \
+    npm neovim git tree direnv jq yq chezmoi ripgrep fd \
     tree-sitter-cli \
     moreutils
 
