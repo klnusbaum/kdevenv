@@ -39,7 +39,7 @@ RUN pacman -Syu --noconfirm \
 
 RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
     chmod 755 /usr/bin/buildifier; \
-    curl -sSfL https://github.com/abhinav/git-spice/releases/download/v0.15.2/git-spice.Linux-x86_64.tar.gz | tar xz -C /usr/bin; \
+    curl -sSfL https://github.com/abhinav/git-spice/releases/download/v0.18.0/git-spice.Linux-x86_64.tar.gz | tar xz -C /usr/bin; \
     chmod 755 /usr/bin/gs; \
     curl -sSfL https://github.com/miniscruff/changie/releases/download/v1.19.1/changie_1.19.1_linux_amd64.tar.gz | tar xz -C /usr/bin; \
     chmod 755 /usr/bin/changie; \
