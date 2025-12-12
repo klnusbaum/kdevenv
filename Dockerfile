@@ -75,7 +75,8 @@ RUN npm install -g \
     dockerfile-language-server-nodejs \
     vscode-langservers-extracted \
     yaml-language-server \
-    @anthropic-ai/claude-code
+    @anthropic-ai/claude-code \
+    @openai/codex
 
 ARG USER_SSH_KEY_NAME
 COPY --chown=$CONTAINER_USER:$CONTAINER_USER ./keys/${USER_SSH_KEY_NAME}.pub /home/$CONTAINER_USER/.ssh/authorized_keys
