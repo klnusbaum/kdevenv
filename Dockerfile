@@ -24,6 +24,8 @@ RUN pacman -Syu --noconfirm \
 
 # Additional tools
 RUN pacman -Syu --noconfirm \
+    clang \
+    cmake \
     kitty-terminfo \
     github-cli \
     kubectl kubectx \
@@ -36,7 +38,8 @@ RUN pacman -Syu --noconfirm \
     imagemagick \
     sops \
     packer \
-    zola
+    zola \
+    bacon
 
 RUN curl -fsSL https://github.com/bazelbuild/buildtools/releases/download/v7.1.2/buildifier-linux-amd64 -o /usr/bin/buildifier; \
     chmod 755 /usr/bin/buildifier; \
